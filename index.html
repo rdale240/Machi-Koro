@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<head>
+    <title>Machi Koro</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <table id="infoTable">
+        <tr>
+            <td>Type</td>
+            <td>Icon</td>
+            <td>Activation</td>
+            <td>Quantity</td>
+            <td>Name</td>
+        </tr>
+    </table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var info = '';
+$(document).ready(function(){
+    $('#demo').append("Hi");
+    $.getJSON("card_information.json",function(data){
+      
+        $.each(data, function(index, value){
+           info += "<tr>"
+           info += "<td>"+value.type+"</td>";
+           info += "<td>"+value.icon+"</td>"
+           info += "<td>"+value.activation+"</td>"
+           info += "<td>"+value.quantity+"</td>"
+           info += "<td>"+value.name+"</td>"
+           info += "<tr>"
+        })
+       console.log("It Worked");
+       $('#infoTable').append(info);
+    }
+    );
+    $('#demo').append("Hello");
+});
+
+</script>
