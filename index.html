@@ -1,40 +1,206 @@
 <!DOCTYPE HTML>
 <head>
     <title>Machi Koro</title>
+    <link href = 'indexstyle.css' rel = 'stylesheet' >
 </head>
 <body>
-    <p id="demo"></p>
-    <table id="infoTable">
-        <tr>
-            <td>Type</td>
-            <td>Icon</td>
-            <td>Activation</td>
-            <td>Quantity</td>
-            <td>Name</td>
-        </tr>
-    </table>
+<div id="card-row">
+    <div class="card1">
+    <h1 id="cardNum1"></h1>
+    <p id="cardName1"></p>
+    <h1 id="icon1"></h1>
+</div>
+<div class="card2">
+    <h1 id="cardNum2"></h1>
+    <p id="cardName2"></p>
+    <h1 id="icon2"></h1>
+</div>
+<div class="card3">
+    <h1 id="cardNum3"></h1>
+    <p id="cardName3"></p>
+    <h1 id="icon3"></h1>
+</div>
+<div class="card4">
+    <h1 id="cardNum4"></h1>
+    <p id="cardName4"></p>
+    <h1 id="icon4"></h1>
+</div>
+<div class="card5">
+    <h1 id="cardNum5"></h1>
+    <p id="cardName5"></p>
+    <h1 id="icon5"></h1>
+</div>
+</div>
+  
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     var info = '';
+    let deckLow = [];
+    let deckHigh = [];
 $(document).ready(function(){
-    $('#demo').append("Hi");
+    let lowNum1 = $("#cardNum1");
+    let lowName1  = $("#cardName1");
+    let lowIcon1 = $("#icon1");
+    let lowNum2 = $("#cardNum2");
+    let lowName2 = $("#cardName2");
+    let lowIcon2 = $("#icon2");
+    let lowNum3 = $("#cardNum3");
+    let lowName3 = $("#cardName3");
+    let lowIcon3 = $("#icon3");
+    let lowNum4 = $("#cardNum4");
+    let lowName4 = $("#cardName4");
+    let lowIcon4 = $("#icon4");
+    let lowNum5 = $("#cardNum5");
+    let lowName5 = $("#cardName5");
+    let lowIcon5 = $("#icon5");
+//    let highNum5 = $("#cardNum5");
+//    let highName5 = $("#cardName5");
+//    let highIcon5 = $("#icon5");
     $.getJSON("card_information.json",function(data){
       
         $.each(data, function(index, value){
-           info += "<tr>"
-           info += "<td>"+value.type+"</td>";
-           info += "<td>"+value.icon+"</td>"
-           info += "<td>"+value.activation+"</td>"
-           info += "<td>"+value.quantity+"</td>"
-           info += "<td>"+value.name+"</td>"
-           info += "<tr>"
-        })
+           if(value.activation <= 6)
+                deckLow.push(value);
+            else if (value.activation > 6)
+                deckHigh.push(value);
+            }
+        
+        )
+        console.log(deckLow.length);
+        console.log(deckHigh.length);
        console.log("It Worked");
-       $('#infoTable').append(info);
-    }
-    );
-    $('#demo').append("Hello");
+       let lowIndex=0;
+       let highIndex=0;
+       var drawnCard;
+
+
+       function changeLowIndex(){
+        lowIndex= Math.floor(Math.random()*deckLow.length);
+       }
+       function changeHighIndex(){     
+        highIndex = Math.floor(Math.random()*deckHigh.length);
+       }
+      
+       function drawCard(){
+          drawnCard = deckLow[lowIndex];
+          console.log(drawnCard);
+       }
+
+       
+       function assignCard1(card){
+           lowNum1.html(card.activation);
+           lowName1.html(card.name);
+           lowIcon1.html(card.icon);
+           changeLowIndex();
+           console.log('assigned card 1');
+       }
+       function assignCard2(card){
+           lowNum2.html(card.activation);
+           lowName2.html(card.name);
+           lowIcon2.html(card.icon);
+           changeLowIndex();
+           console.log('assigned card 2');
+       }
+       function assignCard3(card){
+           lowNum3.html(card.activation);
+           lowName3.html(card.name);
+           lowIcon3.html(card.icon);
+           changeLowIndex();
+           console.log('assigned card 3');
+       }
+       function assignCard4(card){
+           lowNum4.html(card.activation);
+           lowName4.html(card.name);
+           lowIcon4.html(card.icon);
+           changeLowIndex();
+           console.log('assigned card 4');
+       }
+       function assignCard5(card){
+           lowNum5.html(card.activation);
+           lowName5.html(card.name);
+           lowIcon5.html(card.icon);
+           changeLowIndex();
+           console.log('assigned card 5');
+       }
+
+       function assignCards(){
+        changeLowIndex();
+        changeHighIndex();
+           drawCard();
+           assignCard1(drawnCard);
+           drawCard();
+           assignCard2(drawnCard);
+           drawCard();
+           assignCard3(drawnCard);
+           drawCard();
+           assignCard4(drawnCard);
+           drawCard();
+           assignCard5(drawnCard);
+       }
+
+       assignCards();
+    //    changeLowIndex();
+    //     changeHighIndex();
+    //     drawCard();
+    //     assignCard1(drawnCard);
+    //     drawCard();
+    //     assignCard2(drawnCard);
+    //     drawCard();
+    //     assignCard3(drawnCard);
+    //     drawCard();
+    //     assignCard4(drawnCard);
+    //     drawCard();
+    //     assignCard5(drawnCard);
+
+        $(".card1").on("click", function(){
+            console.log("Clicked card 1");
+        })
+        $(".card2").on("click", function(){
+            console.log("Clicked a card 2");
+        })
+        $(".card3").on("click", function(){
+            console.log("Clicked a card 3");
+        })
+        $(".card4").on("click", function(){
+            console.log("Clicked a card 4");
+        })
+        $(".card5").on("click", function(){
+            console.log("Clicked a card 5");
+        })
+       
+       
+
+       /*
+        let currentLowCard=deckLow[lowIndex];
+        let currentHighCard=deckHigh[highIndex];
+
+        lowNum1.html(currentLowCard.activation);
+        lowName1.html(currentLowCard.name);
+        lowIcon1.html(currentLowCard.icon);
+        highNum.html(currentHighCard.activation);
+        highName.html(currentHighCard.name);
+        highIcon.html(currentHighCard.icon);
+        console.log(lowIndex);
+        console.log(highIndex);
+
+     /*  $.each(deck,function(index,value){
+           info += "<tr id='row'>";
+           info += "<td id='type"+index+"'>"+value.type+"</td>";
+           info += "<td id='icon"+index+"'>"+value.icon+"</td>";
+           info += "<td id='activation"+index+"'>"+value.activation+"</td>";
+           info += "<td id='quantity"+index+"'>"+value.quantity+"</td>";
+           info += "<td id='name"+index+"'>"+value.name+"</td>";
+           info += "</tr>";
+         
+        });*/
+
+    
+    });
+    console.log(deckLow);
+    console.log(deckHigh);
+        
+
 });
 
 </script>
