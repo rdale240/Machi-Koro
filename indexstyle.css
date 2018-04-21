@@ -6,8 +6,9 @@
 .card1{
     display:inline-block;
     padding:5%;
-    background-color:teal;
+    background-color:teal; 
     border-radius:5%;
+    margin: 2%;
 }
 
 .card1 h1{
@@ -26,6 +27,7 @@
     padding:5%;
     background-color:teal;
     border-radius:5%;
+    margin: 2%;
 }
 
 .card2 h1{
@@ -44,6 +46,7 @@
     padding:5%;
     background-color:teal;
     border-radius:5%;
+    margin: 2%;
 }
 
 .card3 h1{
@@ -62,6 +65,7 @@
     padding:5%;
     background-color:teal;
     border-radius:5%;
+    margin: 2%;
 }
 
 .card4 h1{
@@ -80,6 +84,7 @@
     padding:5%;
     background-color:teal;
     border-radius:5%;
+    margin: 2%;
 }
 
 .card5 h1{
@@ -92,4 +97,29 @@
     background-color:yellow;
     width:100%;
     text-align:center;
+}
+
+
+.selectedCard{
+    display:inline-block;
+    padding:5%;
+    background-color:teal;
+    border-radius:5%;
+    margin: 2%;
+}
+
+.selectedCard h1{
+    display:block;
+    background-color:green;
+    text-align: center;
+}
+.selectedCard p{
+    display:inline-block;
+    background-color:yellow;
+    width:100%;
+    text-align:center;
+}
+
+.selectedCard h4{
+    margin:0;
 }

@@ -30,6 +30,12 @@
     <p id="cardName5"></p>
     <h1 id="icon5"></h1>
 </div>
+<div class="selectedCard">
+        <h4>Selected Low Card</h4>
+        <h1 id="cardNumS"></h1>
+        <p id="cardNameS"></p>
+        <h1 id="iconS"></h1>
+    </div>
 </div>
   
 </body>
@@ -54,6 +60,9 @@ $(document).ready(function(){
     let lowNum5 = $("#cardNum5");
     let lowName5 = $("#cardName5");
     let lowIcon5 = $("#icon5");
+    let lowNumS = $("#cardNumS");
+    let lowNameS = $("#cardNameS");
+    let lowIconS = $("#iconS");
 //    let highNum5 = $("#cardNum5");
 //    let highName5 = $("#cardName5");
 //    let highIcon5 = $("#icon5");
@@ -61,13 +70,17 @@ $(document).ready(function(){
       
         $.each(data, function(index, value){
            if(value.activation <= 6)
+            while(value.quantity !== 0){
+                value.quantity--;
                 deckLow.push(value);
+            }
             else if (value.activation > 6)
                 deckHigh.push(value);
             }
         
         )
         console.log(deckLow.length);
+        console.log(deckLow);
         console.log(deckHigh.length);
        console.log("It Worked");
        let lowIndex=0;
@@ -84,7 +97,9 @@ $(document).ready(function(){
       
        function drawCard(){
           drawnCard = deckLow[lowIndex];
+          deckLow.splice(lowIndex,1);
           console.log(drawnCard);
+          console.log(deckLow);
        }
 
        
@@ -123,6 +138,13 @@ $(document).ready(function(){
            changeLowIndex();
            console.log('assigned card 5');
        }
+       function assignCardS(card){
+           lowNumS.html(card.num);
+           lowNameS.html(card.name);
+           lowIconS.html(card.icon);
+           changeLowIndex();
+           console.log('assigned card Selected');
+       }
 
        function assignCards(){
         changeLowIndex();
@@ -137,7 +159,7 @@ $(document).ready(function(){
            assignCard4(drawnCard);
            drawCard();
            assignCard5(drawnCard);
-       }
+        }
 
        assignCards();
     //    changeLowIndex();
@@ -153,20 +175,97 @@ $(document).ready(function(){
     //     drawCard();
     //     assignCard5(drawnCard);
 
+       var selectedCard = new Object();
+       selectedCard.num=0;
+       selectedCard.name="";
+       selectedCard.icon="";
+
         $(".card1").on("click", function(){
-            console.log("Clicked card 1");
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find("#cardNum1").text()));
+            selectedCard.name= selected.find("#cardName1").text();
+            selectedCard.icon= selected.find("#icon1").text();
+            console.log(selectedCard);
+            if(deckLow.length === 0)
+            {
+                selected.css("display",'none');
+                assignCardS(selectedCard);
+            }
+            else{
+            drawCard();
+            assignCard1(drawnCard);
+            assignCardS(selectedCard);
+            }
         })
         $(".card2").on("click", function(){
-            console.log("Clicked a card 2");
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find("#cardNum2").text()));
+            selectedCard.name= selected.find("#cardName2").text();
+            selectedCard.icon= selected.find("#icon2").text();
+            console.log(selectedCard);
+            
+            if(deckLow.length === 0)
+            {
+                selected.css("display",'none');
+                assignCardS(selectedCard);
+            }
+            else{
+            drawCard();
+            assignCard2(drawnCard);
+            assignCardS(selectedCard);
+            }
         })
         $(".card3").on("click", function(){
-            console.log("Clicked a card 3");
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find("#cardNum3").text()));
+            selectedCard.name= selected.find("#cardName3").text();
+            selectedCard.icon= selected.find("#icon3").text();
+            console.log(selectedCard);
+            
+            if(deckLow.length === 0)
+            {
+                selected.css("display",'none');
+                assignCardS(selectedCard);
+            }
+            else{
+            drawCard();
+            assignCard3(drawnCard);
+            assignCardS(selectedCard);
+            }
         })
         $(".card4").on("click", function(){
-            console.log("Clicked a card 4");
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find("#cardNum4").text()));
+            selectedCard.name= selected.find("#cardName4").text();
+            selectedCard.icon= selected.find("#icon4").text();
+            console.log(selectedCard);
+            if(deckLow.length === 0)
+            {
+                selected.css("display",'none');
+                assignCardS(selectedCard);
+            }
+            else {
+            drawCard();
+            assignCard4(drawnCard);
+            assignCardS(selectedCard);
+            }
         })
         $(".card5").on("click", function(){
-            console.log("Clicked a card 5");
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find("#cardNum5").text()));
+            selectedCard.name= selected.find("#cardName5").text();
+            selectedCard.icon= selected.find("#icon5").text();
+            console.log(selectedCard);
+            if(deckLow.length === 0)
+            {
+                selected.css("display",'none');
+                assignCardS(selectedCard);
+            }
+            else{
+            drawCard();
+            assignCard5(drawnCard);
+            assignCardS(selectedCard);
+            }
         })
        
        
