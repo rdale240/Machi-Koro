@@ -1,11 +1,22 @@
-#card-row{
+.low-card-row{
     display:block;
     background-color: blue;
 }
 
+.major-card-row{
+    display:block;
+    background-color: violet;
+}
+
+
+.high-card-row{
+    display:block;
+    background-color: red;
+}
+
 .card1{
     display:inline-block;
-    padding:5%;
+    padding:1%;
     background-color:teal; 
     border-radius:5%;
     margin: 2%;
@@ -24,7 +35,7 @@
 }
 .card2{
     display:inline-block;
-    padding:5%;
+    padding:1%;
     background-color:teal;
     border-radius:5%;
     margin: 2%;
@@ -43,7 +54,7 @@
 }
 .card3{
     display:inline-block;
-    padding:5%;
+    padding:1%;
     background-color:teal;
     border-radius:5%;
     margin: 2%;
@@ -62,7 +73,7 @@
 }
 .card4{
     display:inline-block;
-    padding:5%;
+    padding:1%;
     background-color:teal;
     border-radius:5%;
     margin: 2%;
@@ -81,7 +92,7 @@
 }
 .card5{
     display:inline-block;
-    padding:5%;
+    padding:1%;
     background-color:teal;
     border-radius:5%;
     margin: 2%;
@@ -102,7 +113,7 @@
 
 .selectedCard{
     display:inline-block;
-    padding:5%;
+    padding:1%;
     background-color:teal;
     border-radius:5%;
     margin: 2%;

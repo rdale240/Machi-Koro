@@ -4,8 +4,8 @@
     <link href = 'indexstyle.css' rel = 'stylesheet' >
 </head>
 <body>
-<div id="card-row">
-    <div class="card1">
+<div class="low-card-row">
+    <div class="card1">  
     <h1 id="cardNum1"></h1>
     <p id="cardName1"></p>
     <h1 id="icon1"></h1>
@@ -37,108 +37,246 @@
         <h1 id="iconS"></h1>
     </div>
 </div>
+
+<div class="major-card-row">
+    <div class="card1">  
+    <h1 id="cardNum1"></h1>
+    <p id="cardName1"></p>
+    <h1 id="icon1"></h1>
+</div>
+<div class="card2">
+    <h1 id="cardNum2"></h1>
+    <p id="cardName2"></p>
+    <h1 id="icon2"></h1>
+</div>
+<div class="card3">
+    <h1 id="cardNum3"></h1>
+    <p id="cardName3"></p>
+    <h1 id="icon3"></h1>
+</div>
+<div class="card4">
+    <h1 id="cardNum4"></h1>
+    <p id="cardName4"></p>
+    <h1 id="icon4"></h1>
+</div>
+<div class="card5">
+    <h1 id="cardNum5"></h1>
+    <p id="cardName5"></p>
+    <h1 id="icon5"></h1>
+</div>
+<div class="selectedCard">
+        <h4>Selected Low Card</h4>
+        <h1 id="cardNumS"></h1>
+        <p id="cardNameS"></p>
+        <h1 id="iconS"></h1>
+    </div>
+</div>
+
+
+<div class="high-card-row">
+    <div class="card1">  
+    <h1 id="cardNum1"></h1>
+    <p id="cardName1"></p>
+    <h1 id="icon1"></h1>
+</div>
+<div class="card2">
+    <h1 id="cardNum2"></h1>
+    <p id="cardName2"></p>
+    <h1 id="icon2"></h1>
+</div>
+<div class="card3">
+    <h1 id="cardNum3"></h1>
+    <p id="cardName3"></p>
+    <h1 id="icon3"></h1>
+</div>
+<div class="card4">
+    <h1 id="cardNum4"></h1>
+    <p id="cardName4"></p>
+    <h1 id="icon4"></h1>
+</div>
+<div class="card5">
+    <h1 id="cardNum5"></h1>
+    <p id="cardName5"></p>
+    <h1 id="icon5"></h1>
+</div>
+<div class="selectedCard">
+        <h4>Selected High Card</h4>
+        <h1 id="cardNumS"></h1>
+        <p id="cardNameS"></p>
+        <h1 id="iconS"></h1>
+    </div>
+</div>
   
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     var info = '';
     let deckLow = [];
+    let deckMajor = [];
     let deckHigh = [];
 $(document).ready(function(){
-    let lowNum1 = $("#cardNum1");
-    let lowName1  = $("#cardName1");
-    let lowIcon1 = $("#icon1");
-    let lowNum2 = $("#cardNum2");
-    let lowName2 = $("#cardName2");
-    let lowIcon2 = $("#icon2");
-    let lowNum3 = $("#cardNum3");
-    let lowName3 = $("#cardName3");
-    let lowIcon3 = $("#icon3");
-    let lowNum4 = $("#cardNum4");
-    let lowName4 = $("#cardName4");
-    let lowIcon4 = $("#icon4");
-    let lowNum5 = $("#cardNum5");
-    let lowName5 = $("#cardName5");
-    let lowIcon5 = $("#icon5");
-    let lowNumS = $("#cardNumS");
-    let lowNameS = $("#cardNameS");
-    let lowIconS = $("#iconS");
+    //low deck
+    let lowNum1 = $(".low-card-row #cardNum1");
+    let lowName1  = $(".low-card-row #cardName1");
+    let lowIcon1 = $(".low-card-row #icon1");
+    let lowNum2 = $(".low-card-row #cardNum2");
+    let lowName2 = $(".low-card-row #cardName2");
+    let lowIcon2 = $(".low-card-row #icon2");
+    let lowNum3 = $(".low-card-row #cardNum3");
+    let lowName3 = $(".low-card-row #cardName3");
+    let lowIcon3 = $(".low-card-row #icon3");
+    let lowNum4 = $(".low-card-row #cardNum4");
+    let lowName4 = $(".low-card-row #cardName4");
+    let lowIcon4 = $(".low-card-row #icon4");
+    let lowNum5 = $(".low-card-row #cardNum5");
+    let lowName5 = $(".low-card-row #cardName5");
+    let lowIcon5 = $(".low-card-row #icon5");
+    let lowNumS = $(".low-card-row #cardNumS");
+    let lowNameS = $(".low-card-row #cardNameS");
+    let lowIconS = $(".low-card-row #iconS");
+
+
+    let majorNum1 = $(".major-card-row #cardNum1");
+    let majorName1 = $(".major-card-row #cardName1");
+    let majorIcon1 = $(".major-card-row #icon1");
+    let majorNum2 = $(".major-card-row #cardNum2");
+    let majorName2 = $(".major-card-row #cardName2");
+    let majorIcon2 = $(".major-card-row #icon2");
+    let majorNum3 = $(".major-card-row #cardNum3");
+    let majorName3 = $(".major-card-row #cardName3");
+    let majorIcon3 = $(".major-card-row #icon3");
+    let majorNum4 = $(".major-card-row #cardNum4");
+    let majorName4 = $(".major-card-row #cardName4");
+    let majorIcon4 = $(".major-card-row #icon4");
+    let majorNum5 = $(".major-card-row #cardNum5");
+    let majorName5 = $(".major-card-row #cardName5");
+    let majorIcon5 = $(".major-card-row #icon5");
+    let majorNumS = $(".major-card-row #cardNumS");
+    let majorNameS = $(".major-card-row #cardNameS");
+    let majorIconS = $(".major-card-row #iconS");
+
+    //high deck
+    let highNum1 = $(".high-card-row #cardNum1");
+    let highName1  = $(".high-card-row #cardName1");
+    let highIcon1 = $(".high-card-row #icon1");
+    let highNum2 = $(".high-card-row #cardNum2");
+    let highName2 = $(".high-card-row #cardName2");
+    let highIcon2 = $(".high-card-row #icon2");
+    let highNum3 = $(".high-card-row #cardNum3");
+    let highName3 = $(".high-card-row #cardName3");
+    let highIcon3 = $(".high-card-row #icon3");
+    let highNum4 = $(".high-card-row #cardNum4");
+    let highName4 = $(".high-card-row #cardName4");
+    let highIcon4 = $(".high-card-row #icon4");
+    let highNum5 = $(".high-card-row #cardNum5");
+    let highName5 = $(".high-card-row #cardName5");
+    let highIcon5 = $(".high-card-row #icon5");
+    let highNumS = $(".high-card-row #cardNumS");
+    let highNameS = $(".high-card-row #cardNameS");
+    let highIconS = $(".high-card-row #iconS");
 //    let highNum5 = $("#cardNum5");
 //    let highName5 = $("#cardName5");
 //    let highIcon5 = $("#icon5");
     $.getJSON("card_information.json",function(data){
       
         $.each(data, function(index, value){
-           if(value.activation <= 6)
+            if(value.type === "major establishment")
+            while(value.quantity !== 0){
+                value.quantity--;
+                deckMajor.push(value);
+            }
+           else if(value.activation <= 6)
             while(value.quantity !== 0){
                 value.quantity--;
                 deckLow.push(value);
             }
             else if (value.activation > 6)
+            while(value.quantity !== 0){
+                value.quantity--;
                 deckHigh.push(value);
             }
-        
+        }
         )
         console.log(deckLow.length);
         console.log(deckLow);
-        console.log(deckHigh.length);
+        console.log(deckHigh);
+        console.log(deckMajor);
        console.log("It Worked");
        let lowIndex=0;
        let highIndex=0;
+       let majorIndex=0;
        var drawnCard;
 
 
        function changeLowIndex(){
         lowIndex= Math.floor(Math.random()*deckLow.length);
        }
+       function changeMajorIndex(){     
+        majorIndex = Math.floor(Math.random()*deckMajor.length);
+       }
        function changeHighIndex(){     
         highIndex = Math.floor(Math.random()*deckHigh.length);
        }
       
-       function drawCard(){
+       function drawLowCard(){
           drawnCard = deckLow[lowIndex];
           deckLow.splice(lowIndex,1);
           console.log(drawnCard);
           console.log(deckLow);
        }
 
-       
-       function assignCard1(card){
+       function drawMajorCard(){
+          drawnCard = deckMajor[majorIndex];
+          deckMajor.splice(majorIndex,1);
+          console.log(drawnCard);
+          console.log(deckMajor);
+       }
+
+       function drawHighCard(){
+          drawnCard = deckHigh[highIndex];
+          deckHigh.splice(highIndex,1);
+          console.log(drawnCard);
+          console.log(deckHigh);
+       }
+
+       //low cards
+       function assignLowCard1(card){
            lowNum1.html(card.activation);
            lowName1.html(card.name);
            lowIcon1.html(card.icon);
            changeLowIndex();
            console.log('assigned card 1');
        }
-       function assignCard2(card){
+       function assignLowCard2(card){
            lowNum2.html(card.activation);
            lowName2.html(card.name);
            lowIcon2.html(card.icon);
            changeLowIndex();
            console.log('assigned card 2');
        }
-       function assignCard3(card){
+       function assignLowCard3(card){
+
            lowNum3.html(card.activation);
            lowName3.html(card.name);
            lowIcon3.html(card.icon);
            changeLowIndex();
            console.log('assigned card 3');
        }
-       function assignCard4(card){
+       function assignLowCard4(card){
            lowNum4.html(card.activation);
            lowName4.html(card.name);
            lowIcon4.html(card.icon);
            changeLowIndex();
            console.log('assigned card 4');
        }
-       function assignCard5(card){
+       function assignLowCard5(card){
            lowNum5.html(card.activation);
            lowName5.html(card.name);
            lowIcon5.html(card.icon);
            changeLowIndex();
            console.log('assigned card 5');
        }
-       function assignCardS(card){
+       function assignLowCardS(card){
            lowNumS.html(card.num);
            lowNameS.html(card.name);
            lowIconS.html(card.icon);
@@ -146,19 +284,128 @@ $(document).ready(function(){
            console.log('assigned card Selected');
        }
 
+       //major cards
+       function assignMajorCard1(card){
+           majorNum1.html(card.activation);
+           majorName1.html(card.name);
+           majorIcon1.html(card.icon);
+           changeMajorIndex();
+           console.log('assigned card 1M');
+       }
+       function assignMajorCard2(card){
+        majorNum2.html(card.activation);
+        majorName2.html(card.name);
+        majorIcon2.html(card.icon);
+        changeMajorIndex();
+        console.log('assigned card 2M');
+       }
+       function assignMajorCard3(card){
+        majorNum3.html(card.activation);
+        majorName3.html(card.name);
+        majorIcon3.html(card.icon);
+        changeMajorIndex();
+        console.log('assigned card 3M');
+       }
+       function assignMajorCard4(card){
+        majorNum4.html(card.activation);
+        majorName4.html(card.name);
+        majorIcon4.html(card.icon);
+        changeMajorIndex();
+        console.log('assigned card 4M');
+       }
+       function assignMajorCard5(card){
+        majorNum5.html(card.activation);
+        majorName5.html(card.name);
+        majorIcon5.html(card.icon);
+        changeMajorIndex();
+        console.log('assigned card 5M');
+       }
+       function assignMajorCardS(card){
+        majorNumS.html(card.num);
+        majorNameS.html(card.name);
+        majorIconS.html(card.icon);
+        changeMajorIndex();
+        console.log('assigned card SM');
+       }
+
+       //high cards
+       function assignHighCard1(card){
+           highNum1.html(card.activation);
+           highName1.html(card.name);
+           highIcon1.html(card.icon);
+           changeHighIndex();
+           console.log('assigned card 1H');
+       }
+       function assignHighCard2(card){
+        highNum2.html(card.activation);
+        highName2.html(card.name);
+        highIcon2.html(card.icon);
+        changeHighIndex();
+        console.log('assigned card 2H');
+       }
+       function assignHighCard3(card){
+        highNum3.html(card.activation);
+        highName3.html(card.name);
+        highIcon3.html(card.icon);
+        changeHighIndex();
+        console.log('assigned card 3H');
+       }
+       function assignHighCard4(card){
+        highNum4.html(card.activation);
+        highName4.html(card.name);
+        highIcon4.html(card.icon);
+        changeHighIndex();
+        console.log('assigned card 4H');
+       }
+       function assignHighCard5(card){
+        highNum5.html(card.activation);
+        highName5.html(card.name);
+        highIcon5.html(card.icon);
+        changeHighIndex();
+        console.log('assigned card 5H');
+       }
+       function assignHighCardS(card){
+        console.log("Hello");
+        highNumS.html(card.num);
+        highNameS.html(card.name);
+        highIconS.html(card.icon);
+        changeHighIndex();
+        console.log('assigned card SH');
+       }
+
        function assignCards(){
         changeLowIndex();
         changeHighIndex();
-           drawCard();
-           assignCard1(drawnCard);
-           drawCard();
-           assignCard2(drawnCard);
-           drawCard();
-           assignCard3(drawnCard);
-           drawCard();
-           assignCard4(drawnCard);
-           drawCard();
-           assignCard5(drawnCard);
+           drawLowCard();
+           assignLowCard1(drawnCard);
+           drawMajorCard();
+           assignMajorCard1(drawnCard);
+           drawHighCard();
+           assignHighCard1(drawnCard);
+           drawLowCard();
+           assignLowCard2(drawnCard);
+           drawMajorCard();
+           assignMajorCard2(drawnCard);
+           drawHighCard();
+           assignHighCard2(drawnCard);
+           drawLowCard();
+           assignLowCard3(drawnCard);
+           drawMajorCard();
+           assignMajorCard3(drawnCard);
+           drawHighCard();
+           assignHighCard3(drawnCard);
+           drawLowCard();
+           assignLowCard4(drawnCard);
+           drawMajorCard();
+           assignMajorCard4(drawnCard);
+           drawHighCard();
+           assignHighCard4(drawnCard);
+           drawLowCard();
+           assignLowCard5(drawnCard);
+           drawMajorCard();
+           assignMajorCard5(drawnCard);
+           drawHighCard();
+           assignHighCard5(drawnCard);
         }
 
        assignCards();
@@ -180,91 +427,276 @@ $(document).ready(function(){
        selectedCard.name="";
        selectedCard.icon="";
 
-        $(".card1").on("click", function(){
+        $(".low-card-row .card1").on("click", function(){
             let selected = $(this);
-            selectedCard.num = +Number((selected.find("#cardNum1").text()));
-            selectedCard.name= selected.find("#cardName1").text();
-            selectedCard.icon= selected.find("#icon1").text();
+            selectedCard.num = +Number((selected.find(lowNum1).text()));
+            selectedCard.name= selected.find(lowName1).text();
+            selectedCard.icon= selected.find(lowIcon1).text();
             console.log(selectedCard);
             if(deckLow.length === 0)
             {
-                selected.css("display",'none');
+                selected.children().css("display",'none');
                 assignCardS(selectedCard);
             }
             else{
-            drawCard();
-            assignCard1(drawnCard);
-            assignCardS(selectedCard);
+            drawLowCard();
+            assignLowCard1(drawnCard);
+            assignLowCardS(selectedCard);
             }
         })
-        $(".card2").on("click", function(){
+
+        $(".major-card-row .card1").on("click", function(){
             let selected = $(this);
-            selectedCard.num = +Number((selected.find("#cardNum2").text()));
-            selectedCard.name= selected.find("#cardName2").text();
-            selectedCard.icon= selected.find("#icon2").text();
+            selectedCard.num = +Number((selected.find(majorNum1).text()));
+            selectedCard.name= selected.find(majorName1).text();
+            selectedCard.icon= selected.find(majorIcon1).text();
+            console.log(selectedCard);
+            if(deckMajor.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignMajorCardS(selectedCard);
+            }
+            else{
+            drawMajorCard();
+            assignMajorCard1(drawnCard);
+            assignMajorCardS(selectedCard);
+            }
+        })
+
+        $(".high-card-row .card1").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(highNum1).text()));
+            console.log(selectedCard.num);
+            selectedCard.name= selected.find(highName1).text();
+            selectedCard.icon= selected.find(highIcon1).text();
+            console.log(selectedCard);
+            if(deckHigh.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignHighCardS(selectedCard);
+            }
+            else{
+            drawHighCard();
+            assignHighCard1(drawnCard);
+            assignHighCardS(selectedCard);
+            }
+        })
+
+        $(".low-card-row .card2").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(lowNum2).text()));
+            selectedCard.name= selected.find(lowName2).text();
+            selectedCard.icon= selected.find(lowIcon2).text();
             console.log(selectedCard);
             
             if(deckLow.length === 0)
             {
-                selected.css("display",'none');
+                selected.children().css("display",'none');
                 assignCardS(selectedCard);
             }
             else{
-            drawCard();
-            assignCard2(drawnCard);
-            assignCardS(selectedCard);
+            drawLowCard();
+            assignLowCard2(drawnCard);
+            assignLowCardS(selectedCard);
             }
         })
-        $(".card3").on("click", function(){
+
+        $(".major-card-row .card2").on("click", function(){
             let selected = $(this);
-            selectedCard.num = +Number((selected.find("#cardNum3").text()));
-            selectedCard.name= selected.find("#cardName3").text();
-            selectedCard.icon= selected.find("#icon3").text();
+            selectedCard.num = +Number((selected.find(majorNum2).text()));
+            selectedCard.name= selected.find(majorName2).text();
+            selectedCard.icon= selected.find(majorIcon2).text();
+            console.log(selectedCard);
+            if(deckMajor.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignMajorCardS(selectedCard);
+            }
+            else{
+            drawMajorCard();
+            assignMajorCard2(drawnCard);
+            assignMajorCardS(selectedCard);
+            }
+        })
+
+        $(".high-card-row .card2").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(highNum2).text()));
+            selectedCard.name= selected.find(highName2).text();
+            selectedCard.icon= selected.find(highIcon2).text();
+            console.log(selectedCard);
+            if(deckHigh.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignHighCardS(selectedCard);
+            }
+            else{
+            drawHighCard();
+            assignHighCard2(drawnCard);
+            assignHighCardS(selectedCard);
+            }
+        })
+
+        $(".low-card-row .card3").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(lowNum3).text()));
+            selectedCard.name= selected.find(lowName3).text();
+            selectedCard.icon= selected.find(lowIcon3).text();
             console.log(selectedCard);
             
             if(deckLow.length === 0)
             {
-                selected.css("display",'none');
+                selected.children().css("display",'none');
                 assignCardS(selectedCard);
             }
             else{
-            drawCard();
-            assignCard3(drawnCard);
-            assignCardS(selectedCard);
+            drawLowCard();
+            assignLowCard3(drawnCard);
+            assignLowCardS(selectedCard);
             }
         })
-        $(".card4").on("click", function(){
+
+        $(".major-card-row .card3").on("click", function(){
             let selected = $(this);
-            selectedCard.num = +Number((selected.find("#cardNum4").text()));
-            selectedCard.name= selected.find("#cardName4").text();
-            selectedCard.icon= selected.find("#icon4").text();
+            selectedCard.num = +Number((selected.find(majorNum3).text()));
+            selectedCard.name= selected.find(majorName3).text();
+            selectedCard.icon= selected.find(majorIcon3).text();
+            console.log(selectedCard);
+            if(deckMajor.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignMajorCardS(selectedCard);
+            }
+            else{
+            drawMajorCard();
+            assignMajorCard3(drawnCard);
+            assignMajorCardS(selectedCard);
+            }
+        })
+
+        $(".high-card-row .card3").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(highNum3).text()));
+            selectedCard.name= selected.find(highName3).text();
+            selectedCard.icon= selected.find(highIcon3).text();
+            console.log(selectedCard);
+            if(deckHigh.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignHighCardS(selectedCard);
+            }
+            else{
+            drawHighCard();
+            assignHighCard3(drawnCard);
+            assignHighCardS(selectedCard);
+            }
+        })
+
+        $(".low-card-row .card4").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(lowNum4).text()));
+            selectedCard.name= selected.find(lowName4).text();
+            selectedCard.icon= selected.find(lowIcon4).text();
             console.log(selectedCard);
             if(deckLow.length === 0)
             {
-                selected.css("display",'none');
+                selected.children().css("display",'none');
                 assignCardS(selectedCard);
             }
             else {
-            drawCard();
-            assignCard4(drawnCard);
-            assignCardS(selectedCard);
+            drawLowCard();
+            assignLowCard4(drawnCard);
+            assignLowCardS(selectedCard);
             }
         })
-        $(".card5").on("click", function(){
+
+        $(".major-card-row .card4").on("click", function(){
             let selected = $(this);
-            selectedCard.num = +Number((selected.find("#cardNum5").text()));
-            selectedCard.name= selected.find("#cardName5").text();
-            selectedCard.icon= selected.find("#icon5").text();
+            selectedCard.num = +Number((selected.find(majorNum4).text()));
+            selectedCard.name= selected.find(majorName4).text();
+            selectedCard.icon= selected.find(majorIcon4).text();
+            console.log(selectedCard);
+            if(deckMajor.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignMajorCardS(selectedCard);
+            }
+            else{
+            drawMajorCard();
+            assignMajorCard4(drawnCard);
+            assignMajorCardS(selectedCard);
+            }
+        })
+
+        $(".high-card-row .card4").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(highNum4).text()));
+            selectedCard.name= selected.find(highName4).text();
+            selectedCard.icon= selected.find(highIcon4).text();
+            console.log(selectedCard);
+            if(deckHigh.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignHighCardS(selectedCard);
+            }
+            else{
+            drawHighCard();
+            assignHighCard4(drawnCard);
+            assignHighCardS(selectedCard);
+            }
+        })
+
+        $(".low-card-row .card5").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(lowNum5).text()));
+            selectedCard.name= selected.find(lowName5).text();
+            selectedCard.icon= selected.find(lowIcon5).text();
             console.log(selectedCard);
             if(deckLow.length === 0)
             {
-                selected.css("display",'none');
+                selected.children().css("display",'none');
                 assignCardS(selectedCard);
             }
             else{
-            drawCard();
-            assignCard5(drawnCard);
-            assignCardS(selectedCard);
+            drawLowCard();
+            assignLowCard5(drawnCard);
+            assignLowCardS(selectedCard);
+            }
+        })
+
+        $(".major-card-row .card5").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(majorNum5).text()));
+            selectedCard.name= selected.find(majorName5).text();
+            selectedCard.icon= selected.find(majorIcon5).text();
+            console.log(selectedCard);
+            if(deckMajor.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignMajorCardS(selectedCard);
+            }
+            else{
+            drawMajorCard();
+            assignMajorCard5(drawnCard);
+            assignMajorCardS(selectedCard);
+            }
+        })
+
+        $(".high-card-row .card5").on("click", function(){
+            let selected = $(this);
+            selectedCard.num = +Number((selected.find(highNum5).text()));
+            selectedCard.name= selected.find(highName5).text();
+            selectedCard.icon= selected.find(highIcon5).text();
+            console.log(selectedCard);
+            if(deckHigh.length === 0)
+            {
+                selected.children().css("display",'none');
+                assignHighCardS(selectedCard);
+            }
+            else{
+            drawHighCard();
+            assignHighCard5(drawnCard);
+            assignHighCardS(selectedCard);
             }
         })
        
