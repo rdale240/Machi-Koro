@@ -1,3 +1,7 @@
+#Turn h4{
+    text-align: center;
+}
+
 .low-card-row{
     display:block;
     background-color: blue;
@@ -20,6 +24,7 @@
     background-color:teal; 
     border-radius:5%;
     margin: 2%;
+    width: 12%;
 }
 
 .card1 h1{
@@ -39,6 +44,7 @@
     background-color:teal;
     border-radius:5%;
     margin: 2%;
+    width: 12%;
 }
 
 .card2 h1{
@@ -58,6 +64,7 @@
     background-color:teal;
     border-radius:5%;
     margin: 2%;
+    width: 12%;
 }
 
 .card3 h1{
@@ -77,6 +84,7 @@
     background-color:teal;
     border-radius:5%;
     margin: 2%;
+    width: 12%;
 }
 
 .card4 h1{
@@ -96,6 +104,7 @@
     background-color:teal;
     border-radius:5%;
     margin: 2%;
+    width: 12%;
 }
 
 .card5 h1{
@@ -117,6 +126,7 @@
     background-color:teal;
     border-radius:5%;
     margin: 2%;
+    width: 12%;
 }
 
 .selectedCard h1{

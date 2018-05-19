@@ -4,6 +4,12 @@
     <link href = 'indexstyle.css' rel = 'stylesheet' >
 </head>
 <body>
+<div id="Turn">
+    <h4>Current Player: </h4>
+    <h4 id="currentplayer"></h4>
+    <h4>Current Dice Roll: </h4>
+    <h4 id="currentRoll"></h4>
+</div>
 <div class="low-card-row">
     <div class="card1">  
     <h1 id="cardNum1"></h1>
@@ -65,7 +71,7 @@
     <h1 id="icon5"></h1>
 </div>
 <div class="selectedCard">
-        <h4>Selected Low Card</h4>
+        <h4>Selected Major Card</h4>
         <h1 id="cardNumS"></h1>
         <p id="cardNameS"></p>
         <h1 id="iconS"></h1>
@@ -114,8 +120,123 @@
     let deckLow = [];
     let deckMajor = [];
     let deckHigh = [];
+
+    var tempPlayer = {
+        name:"Jon Snow",
+        money:10,
+        cards: [],
+        landmarks: [],
+        isTurn: false,
+    };
+
+    var tempPlayer1 = {
+        name:"Khalessi",
+        money:10,
+        cards: [],
+        landmarks: [],
+        isTurn: false,
+    };
+   
+    var tempPlayer2 = {
+        name:"Player4",
+        money:10,
+        cards: [],
+        landmarks: [],
+        isTurn: false,
+    };
+
+    var Player1 ={name:"",money:0,cards:[],landmarks:[],isTurn:false,diceroll:0};
+    var Player2 ={name:"",money:0,cards:[],landmarks:[],isTurn:false,diceroll:0};
+    var Player3 ={name:"",money:0,cards:[],landmarks:[],isTurn:false,diceroll:0};
+    var Player4 ={name:"",money:0,cards:[],landmarks:[],isTurn:false,diceroll:0};
+    
+
+    var currentPlayer;
+
+    function diceRoll () {
+        return Math.floor(Math.random()*6) + 1;
+    }
+
+    function assignRoll(player){
+        player.diceroll = diceRoll();
+        console.log(player);
+    }
+
+    function decideTurn (Players){
+        Players.forEach(assignRoll);
+        let decider = 0;
+        let returnIndex = 0;
+        for(let i = 0; i< Players.length; i++)
+        {
+            if(Players[i].diceroll > decider)
+            {
+                decider = Players[i].diceroll
+                returnIndex = i;
+            }
+        }
+        return returnIndex;
+
+    }
+
+    var index;
+    function nextPlayer (Players, turn, rollhtml) {
+        currentPlayer.isTurn = false;
+        console.log(currentPlayer);
+        index++;
+        if (index > Players.length-1)
+        {
+            console.log(index);
+            index = 0;
+        }
+        console.log(Players[index])
+        currentPlayer = Players[index];
+        currentPlayer.isTurn = true;
+        currentPlayer.diceroll = diceRoll();
+        rollhtml.html(currentPlayer.diceroll);
+        console.log(currentPlayer);
+        turn.html(currentPlayer.name);
+    }
+   class Player {
+       constructor(name, money, cards, landmarks, isTurn, playerNumber) {
+           this.name = name;
+           this.money = money;
+           this.cards = cards;
+           this.landmarks = landmarks;
+           this.isTurn = isTurn;
+           this.playerNumber = playerNumber;
+       }
+   }
+
+   var Player123 = new Player("Coon",300,[],[],false,123);
+
+    
+    function createPlayer(data, Player){
+        Player.name = data.name;
+        Player.money = data.money;
+        Player.cards = data.cards;
+        Player.landmarks=data.landmarks;
+        Player.isTurn = data.isTurn;
+
+    } 
+    
+    
+    //var Player1 ={name:"",money:0,cards:[],landmarks:[],isTurn:false,}
+
+
 $(document).ready(function(){
+    createPlayer(tempPlayer,Player1)
+    createPlayer(tempPlayer1,Player2)
+    createPlayer(tempPlayer2,Player3);
+    let Players = [Player123, Player1, Player2, Player3];
+    index = decideTurn(Players);
+    console.log(index);
+    currentPlayer = Players[index];
+    currentPlayer.isTurn= true;
+    currentPlayer.diceroll = diceRoll();
     //low deck
+    let rollhtml = $('#currentRoll');
+    rollhtml.html(currentPlayer.diceroll);
+    let turn = $("#currentplayer");
     let lowNum1 = $(".low-card-row #cardNum1");
     let lowName1  = $(".low-card-row #cardName1");
     let lowIcon1 = $(".low-card-row #icon1");
@@ -374,6 +495,7 @@ $(document).ready(function(){
        }
 
        function assignCards(){
+           turn.html(currentPlayer.name);
         changeLowIndex();
         changeHighIndex();
            drawLowCard();
@@ -422,17 +544,19 @@ $(document).ready(function(){
     //     drawCard();
     //     assignCard5(drawnCard);
 
-       var selectedCard = new Object();
-       selectedCard.num=0;
-       selectedCard.name="";
-       selectedCard.icon="";
+       
 
         $(".low-card-row .card1").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(lowNum1).text()));
             selectedCard.name= selected.find(lowName1).text();
             selectedCard.icon= selected.find(lowIcon1).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
+           
             if(deckLow.length === 0)
             {
                 selected.children().css("display",'none');
@@ -446,11 +570,15 @@ $(document).ready(function(){
         })
 
         $(".major-card-row .card1").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(majorNum1).text()));
             selectedCard.name= selected.find(majorName1).text();
             selectedCard.icon= selected.find(majorIcon1).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -464,12 +592,16 @@ $(document).ready(function(){
         })
 
         $(".high-card-row .card1").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(highNum1).text()));
             console.log(selectedCard.num);
             selectedCard.name= selected.find(highName1).text();
             selectedCard.icon= selected.find(highIcon1).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -483,11 +615,15 @@ $(document).ready(function(){
         })
 
         $(".low-card-row .card2").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(lowNum2).text()));
             selectedCard.name= selected.find(lowName2).text();
             selectedCard.icon= selected.find(lowIcon2).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             
             if(deckLow.length === 0)
             {
@@ -502,11 +638,15 @@ $(document).ready(function(){
         })
 
         $(".major-card-row .card2").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(majorNum2).text()));
             selectedCard.name= selected.find(majorName2).text();
             selectedCard.icon= selected.find(majorIcon2).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -520,11 +660,15 @@ $(document).ready(function(){
         })
 
         $(".high-card-row .card2").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(highNum2).text()));
             selectedCard.name= selected.find(highName2).text();
             selectedCard.icon= selected.find(highIcon2).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -538,11 +682,15 @@ $(document).ready(function(){
         })
 
         $(".low-card-row .card3").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(lowNum3).text()));
             selectedCard.name= selected.find(lowName3).text();
             selectedCard.icon= selected.find(lowIcon3).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             
             if(deckLow.length === 0)
             {
@@ -557,11 +705,15 @@ $(document).ready(function(){
         })
 
         $(".major-card-row .card3").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(majorNum3).text()));
             selectedCard.name= selected.find(majorName3).text();
             selectedCard.icon= selected.find(majorIcon3).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -575,11 +727,15 @@ $(document).ready(function(){
         })
 
         $(".high-card-row .card3").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(highNum3).text()));
             selectedCard.name= selected.find(highName3).text();
             selectedCard.icon= selected.find(highIcon3).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -593,11 +749,15 @@ $(document).ready(function(){
         })
 
         $(".low-card-row .card4").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(lowNum4).text()));
             selectedCard.name= selected.find(lowName4).text();
             selectedCard.icon= selected.find(lowIcon4).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckLow.length === 0)
             {
                 selected.children().css("display",'none');
@@ -611,11 +771,15 @@ $(document).ready(function(){
         })
 
         $(".major-card-row .card4").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(majorNum4).text()));
             selectedCard.name= selected.find(majorName4).text();
             selectedCard.icon= selected.find(majorIcon4).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -629,11 +793,15 @@ $(document).ready(function(){
         })
 
         $(".high-card-row .card4").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(highNum4).text()));
             selectedCard.name= selected.find(highName4).text();
             selectedCard.icon= selected.find(highIcon4).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -647,11 +815,15 @@ $(document).ready(function(){
         })
 
         $(".low-card-row .card5").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(lowNum5).text()));
             selectedCard.name= selected.find(lowName5).text();
             selectedCard.icon= selected.find(lowIcon5).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckLow.length === 0)
             {
                 selected.children().css("display",'none');
@@ -665,11 +837,15 @@ $(document).ready(function(){
         })
 
         $(".major-card-row .card5").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(majorNum5).text()));
             selectedCard.name= selected.find(majorName5).text();
             selectedCard.icon= selected.find(majorIcon5).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -683,11 +859,15 @@ $(document).ready(function(){
         })
 
         $(".high-card-row .card5").on("click", function(){
+            var selectedCard = {num:0,name:"",icon:""};
             let selected = $(this);
             selectedCard.num = +Number((selected.find(highNum5).text()));
             selectedCard.name= selected.find(highName5).text();
             selectedCard.icon= selected.find(highIcon5).text();
             console.log(selectedCard);
+            currentPlayer.cards.push(selectedCard);
+            console.log(currentPlayer);
+            nextPlayer(Players, turn, rollhtml);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
