@@ -1,4 +1,22 @@
-#Turn h4{
+#playerContainer{
+    display: flex;
+    justify-content: space-around;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+#diceroll{
+    background-color: white;
+}
+
+.Player h4{
+    text-align: center;
+}
+
+.Player {
+    width: 25%;
+    background-color: white;
     text-align: center;
 }
 

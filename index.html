@@ -4,11 +4,26 @@
     <link href = 'indexstyle.css' rel = 'stylesheet' >
 </head>
 <body>
-<div id="Turn">
-    <h4>Current Player: </h4>
-    <h4 id="currentplayer"></h4>
-    <h4>Current Dice Roll: </h4>
-    <h4 id="currentRoll"></h4>
+<div id="playerContainer">
+    <div id="Player1" class = "Player">
+    <h4>Player: </h4>
+    <h4 id="player1"></h4>
+    </div>
+    <div id="Player2" class = "Player">
+    <h4>Player: </h4>
+    <h4 id="player2"></h4>
+    </div>
+    <div id="Player3" class = "Player">
+    <h4>Player: </h4>
+    <h4 id="player3"></h4>
+    </div>
+    <div id="Player4" class = "Player">
+    <h4>Player: </h4>
+    <h4 id="player4"></h4>
+    </div>
+    <div id="diceroll">
+        <h1 id="rollValue"></h1>
+    </div>
 </div>
 <div class="low-card-row">
     <div class="card1">  
@@ -179,8 +194,9 @@
     }
 
     var index;
-    function nextPlayer (Players, turn, rollhtml) {
+    function nextPlayer (Players, rollhtml,playerDisplays) {
         currentPlayer.isTurn = false;
+        unhighlightTurn(playerDisplays, index)
         console.log(currentPlayer);
         index++;
         if (index > Players.length-1)
@@ -190,12 +206,22 @@
         }
         console.log(Players[index])
         currentPlayer = Players[index];
+        highlightTurn(playerDisplays,index)
         currentPlayer.isTurn = true;
         currentPlayer.diceroll = diceRoll();
         rollhtml.html(currentPlayer.diceroll);
         console.log(currentPlayer);
-        turn.html(currentPlayer.name);
     }
+
+    function highlightTurn(playerDisplays, index){
+        playerDisplays[index].css('background-color','yellow');
+    }
+
+    function unhighlightTurn(playerDisplays, index){
+        playerDisplays[index].css('background-color','white');
+    }
+
+    
    class Player {
        constructor(name, money, cards, landmarks, isTurn, playerNumber) {
            this.name = name;
@@ -218,6 +244,18 @@
         Player.isTurn = data.isTurn;
 
     } 
+
+
+    function displayPlayers(Players)
+    {
+        let base = '#Player';
+        for (i = 0; i <= Players.length-1; i++)
+        {
+            var string = base + (i+1);
+            console.log(string);
+            $(string).html(Players[i].name);
+        }
+    }
     
     
     //var Player1 ={name:"",money:0,cards:[],landmarks:[],isTurn:false,}
@@ -230,13 +268,20 @@ $(document).ready(function(){
     let Players = [Player123, Player1, Player2, Player3];
     index = decideTurn(Players);
     console.log(index);
+    displayPlayers(Players);
+    
     currentPlayer = Players[index];
     currentPlayer.isTurn= true;
     currentPlayer.diceroll = diceRoll();
     //low deck
-    let rollhtml = $('#currentRoll');
+    let rollhtml = $('#rollValue');
     rollhtml.html(currentPlayer.diceroll);
-    let turn = $("#currentplayer");
+    let p1 = $("#Player1");
+    let p2 = $("#Player2");
+    let p3 = $("#Player3");
+    let p4 = $("#Player4");
+    let playerDisplays = [p1,p2,p3,p4];
+    highlightTurn(playerDisplays, index);
     let lowNum1 = $(".low-card-row #cardNum1");
     let lowName1  = $(".low-card-row #cardName1");
     let lowIcon1 = $(".low-card-row #icon1");
@@ -495,7 +540,6 @@ $(document).ready(function(){
        }
 
        function assignCards(){
-           turn.html(currentPlayer.name);
         changeLowIndex();
         changeHighIndex();
            drawLowCard();
@@ -555,7 +599,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml,playerDisplays);
            
             if(deckLow.length === 0)
             {
@@ -578,7 +622,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -601,7 +645,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -623,7 +667,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             
             if(deckLow.length === 0)
             {
@@ -646,7 +690,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -668,7 +712,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -690,7 +734,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             
             if(deckLow.length === 0)
             {
@@ -713,7 +757,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -735,7 +779,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml, playerDisplays);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -757,7 +801,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml,playerDisplays);
             if(deckLow.length === 0)
             {
                 selected.children().css("display",'none');
@@ -779,7 +823,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml,playerDisplays);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -801,7 +845,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players,rollhtml,playerDisplays);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
@@ -823,7 +867,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players,rollhtml,playerDisplays);
             if(deckLow.length === 0)
             {
                 selected.children().css("display",'none');
@@ -845,7 +889,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml,playerDisplays);
             if(deckMajor.length === 0)
             {
                 selected.children().css("display",'none');
@@ -867,7 +911,7 @@ $(document).ready(function(){
             console.log(selectedCard);
             currentPlayer.cards.push(selectedCard);
             console.log(currentPlayer);
-            nextPlayer(Players, turn, rollhtml);
+            nextPlayer(Players, rollhtml,playerDisplays);
             if(deckHigh.length === 0)
             {
                 selected.children().css("display",'none');
